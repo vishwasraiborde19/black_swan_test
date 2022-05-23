@@ -1,9 +1,9 @@
-package com.swan.service;
+package com.swan.user.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.swan.repository.UserRepository;
+import com.swan.user.repository.UserRepository;
 
 @Service
 public class UserService {
