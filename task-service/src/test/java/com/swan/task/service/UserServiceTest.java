@@ -1,6 +1,5 @@
 package com.swan.task.service;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -15,95 +14,109 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.swan.task.entity.vo.TaskStatus;
 import com.swan.task.entity.vo.UserTaskVO;
 
-
 @SpringBootTest
 class UserTaskServiceTest {
-	
+
 	private String taskName = "test_task_name_service";
-	private String taskDescription = "test_task_description_service";	
-	private TaskStatus taskStatus ;	
+	private String taskDescription = "test_task_description_service";
+	private TaskStatus taskStatus;
 	private Long userId = 2000l;
-	
+
 	@Autowired
 	private UserService userService;
-	
-	
+
 	@Test
-	 void testCreateUser() {
-		
+	void testCreateUser() {
+
 		UserTaskVO userTask = new UserTaskVO();
 		userTask.setName(taskName);
 		userTask.setDescription(taskDescription);
 		userTask.setDateTime(new Date());
 		userTask.setStatus(TaskStatus.CREATED);
 		userTask.setUserid(userId);
-		
+
 		ServiceUtils.getEntity(userTask);
 
 		UserTaskVO saved = userService.createTask(userTask);
-		
-		assertEquals (("test_task_name_service"),(saved.getName()));
+
+		assertEquals(("test_task_name_service"), (saved.getName()));
 	}
 
 	@Test
-	 void testUpdateUser() {
-		
+	void testUpdateUser() {
+
 		UserTaskVO userTask = new UserTaskVO();
 		userTask.setName(taskName);
 		userTask.setDescription(taskDescription);
 		userTask.setDateTime(new Date());
 		userTask.setStatus(taskStatus);
 		userTask.setUserid(userId);
-		
+
 		ServiceUtils.getEntity(userTask);
-		
-		UserTaskVO saved =  userService.createTask(userTask);
+
+		UserTaskVO saved = userService.createTask(userTask);
 		saved.setName("updated_Name");
-		
+
 		UserTaskVO updated = userService.updateUserTask(saved);
-		
-		assertEquals("updated_Name",(updated.getName()));
+
+		assertEquals("updated_Name", (updated.getName()));
 	}
-	
+
 	@Test
-	 void testListAllUsers() {
-		
+	void testListAllUsers() {
+
 		UserTaskVO userTaskOne = new UserTaskVO();
 		userTaskOne.setName(taskName);
 		userTaskOne.setDescription(taskDescription);
 		userTaskOne.setDateTime(new Date());
 		userTaskOne.setStatus(taskStatus);
 		userTaskOne.setUserid(userId);
-		
-	    userService.createTask(userTaskOne);
-	    
+
+		userService.createTask(userTaskOne);
+
 		UserTaskVO userTaskTwo = new UserTaskVO();
 		userTaskTwo.setName(taskName);
 		userTaskTwo.setDescription(taskDescription);
 		userTaskTwo.setDateTime(new Date());
 		userTaskOne.setStatus(taskStatus);
 		userTaskOne.setUserid(userId);
-		
-        userService.createTask(userTaskTwo);
-		
+
+		userService.createTask(userTaskTwo);
+
 		List<UserTaskVO> users = userService.getAllUsersTasks();
 		assertNotNull(users);
 	}
-	
+
 	@Test
-	 void testUserInfo() {
-		
+	void testUserInfo() {
+
 		UserTaskVO userTaskOne = new UserTaskVO();
 		userTaskOne.setName(taskName);
 		userTaskOne.setDescription(taskDescription);
 		userTaskOne.setDateTime(new Date());
 		userTaskOne.setStatus(taskStatus);
 		userTaskOne.setUserid(userId);
-		
+
 		UserTaskVO saved = userService.createTask(userTaskOne);
-		Optional<UserTaskVO> fetched = userService.getUserTaskInfo(saved.getId(),userId);
-	    
-		assertNotNull (fetched.get());
+		Optional<UserTaskVO> fetched = userService.getUserTaskInfo(saved.getId(), userId);
+
+		assertNotNull(fetched.get());
+	}
+
+	@Test
+	void testDeleteTask() {
+
+		UserTaskVO userTaskOne = new UserTaskVO();
+		userTaskOne.setName(taskName);
+		userTaskOne.setDescription(taskDescription);
+		userTaskOne.setDateTime(new Date());
+		userTaskOne.setStatus(taskStatus);
+		userTaskOne.setUserid(userId);
+
+		UserTaskVO saved = userService.createTask(userTaskOne);
+		UserTaskVO deleted = userService.deleteTask(saved.getId());
+
+		assertEquals(TaskStatus.DELETED, deleted.getStatus());
 	}
 
 }
