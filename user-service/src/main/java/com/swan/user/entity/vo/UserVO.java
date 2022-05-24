@@ -13,7 +13,7 @@ import lombok.ToString;
 public class UserVO {
 	
 	
-	private Long Id;
+	private Long id;
 	private String username;
 	private String firstName;
 	private String lastName; 

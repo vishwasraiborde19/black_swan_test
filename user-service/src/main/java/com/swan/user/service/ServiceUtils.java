@@ -11,6 +11,9 @@ import com.swan.user.entity.vo.UserVO;
  * */
 public class ServiceUtils {
 	
+	private ServiceUtils() {
+	}
+	
 	public static User getEntity(UserVO valueObject) {
 		User user = new User();
 		BeanUtils.copyProperties(valueObject, user);

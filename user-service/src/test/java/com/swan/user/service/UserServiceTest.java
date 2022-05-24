@@ -1,18 +1,22 @@
 package com.swan.user.service;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.swan.user.entity.vo.UserVO;
 
-
+@Ignore
 @SpringBootTest
-public class UserServiceTest {
+class UserServiceTest {
 	
 	private String username = "test_user_name";
 	private String fistName = "test_first_name";
@@ -23,7 +27,7 @@ public class UserServiceTest {
 	
 	
 	@Test
-	public void testCreateUser() {
+	 void testCreateUser() {
 		
 		UserVO user = new UserVO();
 		user.setUsername(username);
@@ -34,11 +38,11 @@ public class UserServiceTest {
 
 		UserVO saved = userService.createUser(user);
 		
-		assert (("test_first_name").equals(saved.getFirstName()));
+		assertEquals (("test_first_name"),(saved.getFirstName()));
 	}
 
 	@Test
-	public void testUpdateUser() {
+	 void testUpdateUser() {
 		
 		UserVO user = new UserVO();
 		user.setUsername(username);
@@ -52,11 +56,11 @@ public class UserServiceTest {
 		
 		UserVO updated = userService.updateUser(saved);
 		
-		assert ("updated_firstName".equals(updated.getFirstName()));
+		assertEquals("updated_firstName",(updated.getFirstName()));
 	}
 	
 	@Test
-	public void testListAllUsers() {
+	 void testListAllUsers() {
 		
 		UserVO userOne = new UserVO();
 		userOne.setUsername(username);
@@ -73,11 +77,11 @@ public class UserServiceTest {
         userService.createUser(userTwo);
 		
 		List<UserVO> users = userService.getAllUsers();
-		assert (users != null);
+		assertNotNull(users);
 	}
 	
 	@Test
-	public void testUserInfo() {
+	 void testUserInfo() {
 		
 		UserVO userOne = new UserVO();
 		userOne.setUsername(username);
@@ -87,7 +91,7 @@ public class UserServiceTest {
 		UserVO saved = userService.createUser(userOne);
 		Optional<UserVO> fetched = userService.getUserInfo(saved.getId());
 	    
-		assert (fetched.get() != null);
+		assertNotNull (fetched.get());
 	}
 
 }

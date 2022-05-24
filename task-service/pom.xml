@@ -7,10 +7,10 @@
 		<version>2.7.0</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>swan.user</groupId>
-	<artifactId>user-service</artifactId>
+	<groupId>swan.user.task</groupId>
+	<artifactId>task-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>user-service</name>
+	<name>task-service</name>
 	<description>Rest Interface for Task</description>
 	<properties>
 		<java.version>11</java.version>

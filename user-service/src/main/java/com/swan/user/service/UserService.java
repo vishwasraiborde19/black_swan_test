@@ -20,7 +20,7 @@ public class UserService {
 	public UserVO createUser(UserVO userVO) {
 		
 		User user = ServiceUtils.getEntity(userVO);
-		userRepository.save(user);
+		user = userRepository.save(user);
 
 		return ServiceUtils.getValue(user);
 
@@ -32,7 +32,7 @@ public class UserService {
 		if (user.isPresent()) {
 			return user.map(ServiceUtils::getValue);
 		} else {
-			return user.empty();
+			return Optional.empty();
 		}
 
 	}
@@ -41,12 +41,6 @@ public class UserService {
 
 		User user = ServiceUtils.getEntity(userVO);
 		user = userRepository.save(user);
-
-		if (user.equals(userVO)) {
-			// no update 
-			// what does the the consumer want in this case
-			// message / code ?
-		}
 
 		return userVO;
 

@@ -20,7 +20,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // note the community edition does not provide a robust generation value therefore will start with 1
-	private Long Id;
+	private Long id;
 	private String username;
 	private String firstName;
 	private String lastName; 
