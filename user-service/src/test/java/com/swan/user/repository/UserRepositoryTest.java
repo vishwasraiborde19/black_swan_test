@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.swan.user.entity.domain.User;
 
-@Ignore
+
 @SpringBootTest
 class UserRepositoryTest {
 

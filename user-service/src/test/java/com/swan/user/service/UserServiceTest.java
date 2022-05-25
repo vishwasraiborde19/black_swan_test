@@ -14,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.swan.user.entity.vo.UserVO;
 
-@Ignore
+
 @SpringBootTest
 class UserServiceTest {
 	
