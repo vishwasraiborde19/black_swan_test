@@ -19,7 +19,7 @@ import com.swan.task.service.UserService;
 
 @RestController
 @RequestMapping("/api")
-public class UserController {
+public class UserTaskController {
 
 	@Autowired
 	private UserService userSevice;
