@@ -36,7 +36,7 @@ public class UserMapper {
 		return userVO;
 	}
 	
-	// aha not sending the username in test case 2  and nullyfing it, got it covered now 
+	
 	private static String[] getNullPropertyNames (Object source) {
 	     final BeanWrapper beanWrapper = new BeanWrapperImpl(source);
 	     java.beans.PropertyDescriptor[] pds = beanWrapper.getPropertyDescriptors();
