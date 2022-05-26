@@ -52,6 +52,7 @@ public class UserController {
 	@PutMapping("/user/{id}")
 	public UserVO updateUser(@PathVariable Long id, @RequestBody UserVO user) {
 		log.info("updateUser");
+		
 		user.setId(id);
 		return userSevice.updateUser(user);
 
@@ -61,6 +62,7 @@ public class UserController {
 	@GetMapping("/user")
 	public List<UserVO> listAllUsers() {
 		log.info("listAllUsers");
+		
 		return userSevice.getAllUsers();
 
 	}
@@ -69,6 +71,7 @@ public class UserController {
 	@GetMapping("/user/{id}")
 	public Optional<UserVO> getUserInfo(@PathVariable Long id) {
 		log.info("getUserInfo");
+		
 		return userSevice.getUserInfo(id);
 
 	}
@@ -78,7 +81,7 @@ public class UserController {
 		log.info("createTask");
 		
 		userTask.setUserid(userid);
-		userTask.setStatus(TaskStatus.ASSIGNED.toString());
+		userTask.setStatus(TaskStatus.ASSIGNED.name());
 		return userTaskService.createTask(userTask);
 
 	}
