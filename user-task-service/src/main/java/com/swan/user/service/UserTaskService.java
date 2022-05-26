@@ -48,7 +48,7 @@ public class UserTaskService {
 		Optional<UserTask> currentUserTask = userTaskRepository.findById(userTaskVO.getId());
 		if (currentUserTask.isPresent()) {
 			UserTask userTask = TaskMapper.mapProperties(userTaskVO,currentUserTask.get());
-			userTask.setStatus(TaskStatus.UPDATED.name());
+			//userTask.setStatus(TaskStatus.UPDATED.name());
 			userTask = userTaskRepository.save(userTask);
 			return TaskMapper.getValue(userTask);
 		} else {

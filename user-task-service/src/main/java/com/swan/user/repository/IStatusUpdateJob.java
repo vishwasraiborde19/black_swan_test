@@ -1,4 +1,4 @@
-package com.swan.user.service.batch;
+package com.swan.user.repository;
 
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.CrudRepository;

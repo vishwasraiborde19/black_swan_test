@@ -77,25 +77,25 @@ public class UserController {
 	}
 	
 	@PostMapping("/user/{user_id}/task")
-	public UserTaskVO createTask(@PathVariable(name = "user_id") Long userid, @RequestBody UserTaskVO userTask) {
+	public UserTaskVO createTask(@PathVariable(name = "user_id") Long userid, @RequestBody UserTaskVO task) {
 		log.info("createTask");
 		
-		userTask.setUserid(userid);
-		userTask.setStatus(TaskStatus.ASSIGNED.name());
-		return userTaskService.createTask(userTask);
+		task.setUserid(userid);
+		task.setStatus(TaskStatus.CREATED.name());
+		return userTaskService.createTask(task);
 
 	}
 
 
 	@PutMapping("/user/{user_id}/task/{task_id}")
 	public UserTaskVO updateTask(@PathVariable(name = "task_id") Long taskid,
-			@PathVariable(name = "user_id") Long userid, @RequestBody UserTaskVO userTaskVO) {
+			@PathVariable(name = "user_id") Long userid, @RequestBody UserTaskVO task) {
 		log.info("updateTask");
 		
-		userTaskVO.setId(taskid);
-		userTaskVO.setUserid(userid);
+		task.setId(taskid);
+		task.setUserid(userid);
 
-		return userTaskService.updateUserTask(userTaskVO);
+		return userTaskService.updateUserTask(task);
 
 	}
 
