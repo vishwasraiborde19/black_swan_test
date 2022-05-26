@@ -15,7 +15,7 @@ public class TaskMapper extends SwanMapper{
 	}
 	
 	/*
-	 *
+	 *returns a new Entity Object from value object
 	 * */
 	public static UserTask getEntity(UserTaskVO valueObject) {
 		UserTask user = new UserTask();
@@ -23,6 +23,9 @@ public class TaskMapper extends SwanMapper{
 		return user;
 	}	
 	
+	/*
+	 *returns a new Value Object from Entiry object
+	 * */
 	public static UserTaskVO getValue(UserTask domainObject) {
 		UserTaskVO userVO = new UserTaskVO();
 		BeanUtils.copyProperties(domainObject, userVO);
@@ -30,6 +33,9 @@ public class TaskMapper extends SwanMapper{
 	}
 	
 	
+	/*
+	 *returns a Existing Entity Object from Entiry object and ignore any null properties from value object
+	 * */
 	public static UserTask mapProperties(UserTaskVO source,UserTask target) {
 		BeanUtils.copyProperties(source, target,getNullPropertyNames(source));
 		return target;

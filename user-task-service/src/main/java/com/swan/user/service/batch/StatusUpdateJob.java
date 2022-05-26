@@ -15,8 +15,11 @@ import org.springframework.stereotype.Component;
 import com.swan.user.entity.domain.UserTask;
 import com.swan.user.entity.vo.TaskStatus;
 
+import lombok.extern.slf4j.Slf4j;
+
 //https://spring.io/guides/gs/scheduling-tasks/
 @Component
+@Slf4j
 public class StatusUpdateJob {
 
 	@Autowired
@@ -39,12 +42,12 @@ public class StatusUpdateJob {
 		iStatusUpdateJob.saveAll(tasks);
 	}
 
-	//@Scheduled(fixedDelay = 10000)
+	@Scheduled(fixedDelay = 15000)
 	public void runUpdateStatusjob() {
 
 		UserTask task = new UserTask();
 		task.setStatus(TaskStatus.CREATED.toString());
-		System.out.println("I run faster than Bolt");
+		
 		List<UserTask> tasks = getAllPendingTasks(task);
 
 		//Test request to print all pending tasks
