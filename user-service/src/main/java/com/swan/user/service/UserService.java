@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.swan.user.entity.domain.User;
+import com.swan.user.domain.User;
 import com.swan.user.entity.vo.UserVO;
 import com.swan.user.repository.UserRepository;
 

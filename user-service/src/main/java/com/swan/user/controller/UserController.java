@@ -15,38 +15,45 @@ import org.springframework.web.bind.annotation.RestController;
 import com.swan.user.entity.vo.UserVO;
 import com.swan.user.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/api")
+@Slf4j
 public class UserController {
 
 	@Autowired
 	private UserService userSevice;
 
-	// http://localhost:8080/api/user
+
 	@PostMapping("/user")
 	public UserVO createUser(@RequestBody UserVO user) {
+		log.info("createUser");
 		return userSevice.createUser(user);
 
 	}
 
-	// http://localhost:8080/api/user/{id}
-	@PutMapping("/{id}")
+
+	@PutMapping("/user/{id}")
 	public UserVO updateUser(@PathVariable Long id, @RequestBody UserVO user) {
+		log.info("updateUser");
 		user.setId(id);
 		return userSevice.updateUser(user);
 
 	}
 
-	// GET http://localhost:8080/api/user
+
 	@GetMapping("/user")
 	public List<UserVO> listAllUsers() {
+		log.info("listAllUsers");
 		return userSevice.getAllUsers();
 
 	}
 
-	// GET http://localhost:8080/api/user/{id}
-	@GetMapping("/{id}")
+
+	@GetMapping("/user/{id}")
 	public Optional<UserVO> getUserInfo(@PathVariable Long id) {
+		log.info("getUserInfo");
 		return userSevice.getUserInfo(id);
 
 	}

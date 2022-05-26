@@ -1,0 +1,46 @@
+spring:  
+  cloud:
+    gateway:
+      routes:
+        - id: USER-SERVICE
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/user/**
+#          filters:
+#            - name: CircuitBreaker
+#              args:
+#                name: USER_SERVICE-
+#                fallbackuri: forward:/<if user services forward to fallback url>
+        - id: USER-TASK-SERVICE
+          uri: lb://USER-TASK-SERVICE
+          predicates:
+            - Path=v1/api/user/**
+#          filters:
+#            - name: CircuitBreaker
+#              args:
+#                name: USER_TASK_SERVICE
+#                fallbackuri: forward:/<if user task services forward to fallback url>
+ 
+# wanted to implement the group swagger but time is not permitting also a good to have not a must 
+#        - id: swagger1
+#          uri: http://192.168.0.11:8081
+#          predicates:
+#            - Path=/v3/api-docs/**
+#          filters:
+#            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v2/api-docs
+#        - id: swagger2
+#          uri: http://192.168.0.11:8082
+#          predicates:
+#            - Path=/v3/api-docs/**
+#          filters:
+#            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v2/api-docs
+            
+            
+         
+          
+       
+   
+
+
+
+

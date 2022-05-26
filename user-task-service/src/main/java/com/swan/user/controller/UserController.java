@@ -1,4 +1,4 @@
-package com.swan.task.controller;
+package com.swan.user.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,28 +13,73 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.swan.task.entity.vo.TaskStatus;
-import com.swan.task.entity.vo.UserTaskVO;
-import com.swan.task.service.UserService;
+import com.swan.user.entity.vo.TaskStatus;
+import com.swan.user.entity.vo.UserTaskVO;
+import com.swan.user.entity.vo.UserVO;
+import com.swan.user.exception.UserExsistsException;
+import com.swan.user.service.UserService;
+import com.swan.user.service.UserTaskService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("v1/api")
+@RequestMapping("/api")
 @Slf4j
-public class UserTaskController {
+public class UserController {
 
 	@Autowired
 	private UserService userSevice;
+	
+	@Autowired
+	private UserTaskService userTaskService;
 
 
+
+	@PostMapping("/user")
+	public UserVO createUser(@RequestBody UserVO user) {
+		
+		log.info("createUser");
+		try {
+			return userSevice.createUser(user); 
+		} catch (UserExsistsException e) {
+			log.error("UserController: createUser ",e.getMessage());
+		}
+		return user;
+
+	}
+
+
+	@PutMapping("/user/{id}")
+	public UserVO updateUser(@PathVariable Long id, @RequestBody UserVO user) {
+		log.info("updateUser");
+		user.setId(id);
+		return userSevice.updateUser(user);
+
+	}
+
+
+	@GetMapping("/user")
+	public List<UserVO> listAllUsers() {
+		log.info("listAllUsers");
+		return userSevice.getAllUsers();
+
+	}
+
+
+	@GetMapping("/user/{id}")
+	public Optional<UserVO> getUserInfo(@PathVariable Long id) {
+		log.info("getUserInfo");
+		return userSevice.getUserInfo(id);
+
+	}
+	
 	@PostMapping("/user/{user_id}/task")
 	public UserTaskVO createTask(@PathVariable(name = "user_id") Long userid, @RequestBody UserTaskVO userTask) {
 		log.info("createTask");
 		
 		userTask.setUserid(userid);
-		userTask.setStatus(TaskStatus.ASSIGNED);
-		return userSevice.createTask(userTask);
+		userTask.setStatus(TaskStatus.ASSIGNED.toString());
+		return userTaskService.createTask(userTask);
 
 	}
 
@@ -47,7 +92,7 @@ public class UserTaskController {
 		userTaskVO.setId(taskid);
 		userTaskVO.setUserid(userid);
 
-		return userSevice.updateUserTask(userTaskVO);
+		return userTaskService.updateUserTask(userTaskVO);
 
 	}
 
@@ -56,7 +101,7 @@ public class UserTaskController {
 	public UserTaskVO deleteTask(@PathVariable(name = "user_id") Long userid, @PathVariable(name = "task_id") Long taskid) {
 		log.info("deleteTask");
 
-		return userSevice.deleteTask(taskid);
+		return userTaskService.deleteTask(taskid);
 
 	}
 
@@ -65,7 +110,7 @@ public class UserTaskController {
 	public Optional<UserTaskVO> getUserTaskInfo(@PathVariable(name = "user_id") Long userid , @PathVariable(name = "task_id") Long taskid) {
 		log.info("getUserTaskInfo");
 		
-		return userSevice.getUserTaskInfo(taskid,userid);
+		return userTaskService.getUserTaskInfo(taskid,userid);
 
 	}
 	
@@ -74,8 +119,10 @@ public class UserTaskController {
 	public List<UserTaskVO> getAllTaskOfUser(@PathVariable(name = "user_id") Long userid ) {
 		log.info("getAllTaskOfUser");
 		
-		return userSevice.getAllTaskOfUser(userid);
+		return userTaskService.getAllTaskOfUser(userid);
 
 	}
+	
+	
 
 }

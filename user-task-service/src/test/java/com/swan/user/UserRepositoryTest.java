@@ -1,19 +1,20 @@
-package com.swan.user.repository;
+package com.swan.user;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.swan.user.domain.User;
+import com.swan.user.entity.domain.User;
+import com.swan.user.repository.UserRepository;
 
 
 @SpringBootTest
@@ -30,7 +31,7 @@ class UserRepositoryTest {
 	@Test
 	 void testCreateUser() {
 		User user = new User();
-		user.setUsername(username);
+		user.setUsername(username + new Date());
 		user.setFirstName(fistName);
 		user.setLastName(lastName);
 
@@ -43,21 +44,21 @@ class UserRepositoryTest {
 	 void testUserInfo() {
 
 		User user = new User();
-		user.setUsername(username);
+		user.setUsername(username +  new Date());
 		user.setFirstName(fistName);
 		user.setLastName(lastName);
 
 		user = userRepository.save(user);
 
 		Optional<User> foundUser = userRepository.findById(user.getId());
-		assertEquals("test_user_name",(foundUser.get().getUsername()));
+		assertNotNull(foundUser.get().getUsername());
 	}
 
 	@Test
 	 void testUpdateUser() {
 
 		User user = new User();
-		user.setUsername(username);
+		user.setUsername(username + new Date());
 		user.setFirstName(fistName);
 		user.setLastName(lastName);
 		user = userRepository.save(user);

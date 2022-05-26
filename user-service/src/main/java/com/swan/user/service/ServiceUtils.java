@@ -2,7 +2,7 @@ package com.swan.user.service;
 
 import org.springframework.beans.BeanUtils;
 
-import com.swan.user.entity.domain.User;
+import com.swan.user.domain.User;
 import com.swan.user.entity.vo.UserVO;
 
 
